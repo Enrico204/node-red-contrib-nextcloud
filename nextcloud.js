@@ -285,7 +285,8 @@ module.exports = function (RED) {
       client.putFileContents(directory + name, file, { format: 'binary' }, option)
         .then(function (contents) {
           console.log(contents)
-          node.send({ 'payload': JSON.parse(contents) })
+          // Response size is empty when the file is created successfully
+          node.send({ 'payload': {} })
         }, function () {
           node.error('Nextcloud:WebDAV -> send file went wrong.')
         })
